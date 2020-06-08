@@ -11,11 +11,13 @@ import UIKit
 class DetailViewController: UIViewController {
 
     @IBOutlet var imageView: UIImageView!
+    var namePicture: String?
+    var maxArrayPicture: String?
     var selectedImage: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = selectedImage
+        title = "\(namePicture ?? ":)No position") from \(maxArrayPicture ?? "(:No Array Picture")" //selectedImage
         navigationItem.largeTitleDisplayMode = .never
         
         if let imageToload = selectedImage {
