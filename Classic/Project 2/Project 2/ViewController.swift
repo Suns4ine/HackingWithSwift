@@ -18,7 +18,13 @@ class ViewController: UIViewController {
     
     var countries = [String]()
     var correctAnswer = Int.random(in: 0...2)
-    var score = 0
+    var score: Int = 0 {
+        didSet {
+        scoreTitle.text = "Score: \(score)"
+        }
+    }
+    var result = 0
+    var textBanner = ""
     
     
 
@@ -52,15 +58,27 @@ class ViewController: UIViewController {
             title = "Correct"
             score += 1
             correctAnswer = .random(in: 0...2)
+            textBanner = "Your score is \(score)."
         } else {
-            title = "Wrong"
+            title = "Oops"
             score -= 1
+            textBanner = "maybe this is a \(countries[sender.tag].capitalized)"
         }
-        scoreTitle.text = "Score: \(score)"
+        result += 1
         
-        let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
-        present(ac, animated: true)
+        if (result == 10) {
+
+            let final = UIAlertController(title: "The end", message: "Your result is \(score) out of 10", preferredStyle: .alert)
+            final.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+            present(final, animated: true)
+            result = 0
+            score = 0
+            
+        } else {
+            let ac = UIAlertController(title: title, message: textBanner, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+            present(ac, animated: true)
+        }
     }
     //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()

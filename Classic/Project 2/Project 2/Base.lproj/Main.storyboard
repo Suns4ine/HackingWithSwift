@@ -65,7 +65,7 @@
                         <outlet property="button1" destination="mfr-Xe-Dpm" id="HhQ-Sn-yzU"/>
                         <outlet property="button2" destination="fhS-2R-Cja" id="Cs7-n5-MYF"/>
                         <outlet property="button3" destination="6jt-nv-hWb" id="6wG-pF-1zc"/>
-                        <outlet property="scoreTitle" destination="DTG-dz-wKK" id="n81-hJ-Cin"/>
+                        <outlet property="scoreTitle" destination="DTG-dz-wKK" id="IVY-jO-PeU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
