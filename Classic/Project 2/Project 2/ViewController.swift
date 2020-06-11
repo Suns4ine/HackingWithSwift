@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         askQuestion()
     }
-    func askQuestion(){//action: UIApplication! = nil) {
+    func askQuestion(){ //(action: UIApplication! = nil) {
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)

@@ -19,33 +19,31 @@
                                 <rect key="frame" x="107" y="100" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60D-Tt-0yt">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhS-2R-Cja">
                                 <rect key="frame" x="107" y="230" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoE-ef-2uX">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jt-nv-hWb">
                                 <rect key="frame" x="107" y="360" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="60D-Tt-0yt" firstAttribute="centerX" secondItem="mfr-Xe-Dpm" secondAttribute="centerX" id="Mk5-ZH-zk2"/>
-                            <constraint firstItem="mfr-Xe-Dpm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="Rbp-FC-hCp"/>
-                            <constraint firstItem="xoE-ef-2uX" firstAttribute="centerY" secondItem="60D-Tt-0yt" secondAttribute="centerY" id="aTT-6G-Iw3"/>
-                            <constraint firstItem="xoE-ef-2uX" firstAttribute="centerX" secondItem="60D-Tt-0yt" secondAttribute="centerX" id="esp-e8-gyU"/>
-                            <constraint firstItem="mfr-Xe-Dpm" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lCy-sR-gI1"/>
-                            <constraint firstItem="xoE-ef-2uX" firstAttribute="top" secondItem="60D-Tt-0yt" secondAttribute="bottom" constant="30" id="lSI-ed-W2O"/>
-                            <constraint firstItem="60D-Tt-0yt" firstAttribute="top" secondItem="mfr-Xe-Dpm" secondAttribute="bottom" constant="30" id="t3M-y2-SLX"/>
-                            <constraint firstItem="xoE-ef-2uX" firstAttribute="top" secondItem="60D-Tt-0yt" secondAttribute="bottom" constant="30" id="xRc-Ml-n3d"/>
+                            <constraint firstItem="6jt-nv-hWb" firstAttribute="centerX" secondItem="fhS-2R-Cja" secondAttribute="centerX" id="EKI-FF-NvZ"/>
+                            <constraint firstItem="fhS-2R-Cja" firstAttribute="centerX" secondItem="mfr-Xe-Dpm" secondAttribute="centerX" id="Pws-Oo-KCD"/>
+                            <constraint firstItem="mfr-Xe-Dpm" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Vi7-qo-LyS"/>
+                            <constraint firstItem="fhS-2R-Cja" firstAttribute="top" secondItem="mfr-Xe-Dpm" secondAttribute="bottom" constant="30" id="bag-Uh-xGj"/>
+                            <constraint firstItem="mfr-Xe-Dpm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="g0B-Xo-g57"/>
+                            <constraint firstItem="6jt-nv-hWb" firstAttribute="top" secondItem="fhS-2R-Cja" secondAttribute="bottom" constant="30" id="iNK-Ql-YQD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="IhC-df-86W"/>
                     <connections>
-                        <outlet property="button1" destination="mfr-Xe-Dpm" id="PRx-aU-Pxj"/>
-                        <outlet property="button2" destination="60D-Tt-0yt" id="TpE-mH-aVD"/>
-                        <outlet property="button3" destination="xoE-ef-2uX" id="BM7-HS-IWt"/>
+                        <outlet property="button1" destination="mfr-Xe-Dpm" id="HhQ-Sn-yzU"/>
+                        <outlet property="button2" destination="fhS-2R-Cja" id="Cs7-n5-MYF"/>
+                        <outlet property="button3" destination="6jt-nv-hWb" id="6wG-pF-1zc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
