@@ -15,7 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet var button3: UIButton!
     
     var countries = [String]()
+    var correctAnswer = Int.random(in: 0...2)
     var score = 0
+    
     
 
     override func viewDidLoad() {
@@ -33,13 +35,30 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         askQuestion()
     }
-    func askQuestion(){ //(action: UIApplication! = nil) {
+    func askQuestion(action: UIAlertAction! = nil) {
+        countries.shuffle()
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
+        title = countries[correctAnswer].uppercased()
     }
     
-//    override func didReceiveMemoryWarning() {
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        var title: String
+        
+        if sender.tag == correctAnswer {
+            title = "Correct"
+            score += 1
+        } else {
+            title = "Wrong"
+            score -= 1
+        }
+        
+        let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+        present(ac, animated: true)
+    }
+    //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
 //    }
 
