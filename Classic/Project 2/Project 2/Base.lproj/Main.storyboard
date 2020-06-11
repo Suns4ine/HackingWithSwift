@@ -16,33 +16,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfr-Xe-Dpm">
-                                <rect key="frame" x="7" y="100" width="400" height="200"/>
+                                <rect key="frame" x="107" y="100" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6q6-CI-B2I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhS-2R-Cja">
-                                <rect key="frame" x="7" y="330" width="400" height="200"/>
+                                <rect key="frame" x="107" y="230" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JoN-lM-aFk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jt-nv-hWb">
-                                <rect key="frame" x="7" y="560" width="400" height="200"/>
+                                <rect key="frame" x="107" y="360" width="200" height="100"/>
                                 <state key="normal" image="us"/>
                                 <connections>
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="81P-Oo-lhd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTG-dz-wKK">
+                                <rect key="frame" x="132" y="712" width="150" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="FlJ-bV-1aQ"/>
+                                    <constraint firstAttribute="height" constant="100" id="eM1-oW-eaY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="DTG-dz-wKK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CFo-qW-guV"/>
                             <constraint firstItem="6jt-nv-hWb" firstAttribute="centerX" secondItem="fhS-2R-Cja" secondAttribute="centerX" id="EKI-FF-NvZ"/>
                             <constraint firstItem="fhS-2R-Cja" firstAttribute="centerX" secondItem="mfr-Xe-Dpm" secondAttribute="centerX" id="Pws-Oo-KCD"/>
                             <constraint firstItem="mfr-Xe-Dpm" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Vi7-qo-LyS"/>
                             <constraint firstItem="fhS-2R-Cja" firstAttribute="top" secondItem="mfr-Xe-Dpm" secondAttribute="bottom" constant="30" id="bag-Uh-xGj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DTG-dz-wKK" secondAttribute="bottom" constant="50" id="cg6-h7-woQ"/>
                             <constraint firstItem="mfr-Xe-Dpm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="g0B-Xo-g57"/>
                             <constraint firstItem="6jt-nv-hWb" firstAttribute="top" secondItem="fhS-2R-Cja" secondAttribute="bottom" constant="30" id="iNK-Ql-YQD"/>
                         </constraints>
@@ -53,6 +65,7 @@
                         <outlet property="button1" destination="mfr-Xe-Dpm" id="HhQ-Sn-yzU"/>
                         <outlet property="button2" destination="fhS-2R-Cja" id="Cs7-n5-MYF"/>
                         <outlet property="button3" destination="6jt-nv-hWb" id="6wG-pF-1zc"/>
+                        <outlet property="scoreTitle" destination="DTG-dz-wKK" id="n81-hJ-Cin"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

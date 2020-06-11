@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet var button1: UIButton!
     @IBOutlet var button2: UIButton!
     @IBOutlet var button3: UIButton!
+    @IBOutlet var scoreTitle: UILabel!
+    
     
     var countries = [String]()
     var correctAnswer = Int.random(in: 0...2)
@@ -49,10 +51,12 @@ class ViewController: UIViewController {
         if sender.tag == correctAnswer {
             title = "Correct"
             score += 1
+            correctAnswer = .random(in: 0...2)
         } else {
             title = "Wrong"
             score -= 1
         }
+        scoreTitle.text = "Score: \(score)"
         
         let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
