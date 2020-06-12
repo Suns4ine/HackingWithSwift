@@ -25,11 +25,14 @@ class ViewController: UIViewController {
     }
     var result = 0
     var textBanner = ""
+    let appName = Bundle.appName()
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
         
         button1.layer.borderWidth = 1
         button2.layer.borderWidth = 1
@@ -80,6 +83,17 @@ class ViewController: UIViewController {
             present(ac, animated: true)
         }
     }
+    
+    @objc func shareTapped() {
+        let myResult = """
+        In \(appName)
+        My score: \(score) from \(result)
+        """
+
+        let vc = UIActivityViewController(activityItems: [myResult], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
+    }
     //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
 //    }
@@ -87,3 +101,15 @@ class ViewController: UIViewController {
 
 }
 
+extension Bundle {
+    static func appName() -> String {
+        guard let dictionary = Bundle.main.infoDictionary else {
+            return ""
+        }
+        if let version : String = dictionary["CFBundleName"] as? String {
+            return version
+        } else {
+            return ""
+        }
+    }
+}
