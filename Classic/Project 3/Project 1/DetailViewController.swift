@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     var namePicture: String?
     var maxArrayPicture: String?
     var selectedImage: String?
+    let appName = Bundle.appName()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +46,15 @@ class DetailViewController: UIViewController {
             print("No image found")
             return
         }
-        guard let nameImage = selectedImage else {
+        guard var nameImage = selectedImage else {
             print ("No name image found")
             return
         }
 
+        nameImage = """
+        In \(appName)
+        name photo: \(selectedImage ?? "no name :)")
+"""
         let vc = UIActivityViewController(activityItems: [image, nameImage], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
@@ -65,4 +70,17 @@ class DetailViewController: UIViewController {
     }
     */
 
+}
+
+extension Bundle {
+    static func appName() -> String {
+        guard let dictionary = Bundle.main.infoDictionary else {
+            return ""
+        }
+        if let version : String = dictionary["CFBundleName"] as? String {
+            return version
+        } else {
+            return ""
+        }
+    }
 }
