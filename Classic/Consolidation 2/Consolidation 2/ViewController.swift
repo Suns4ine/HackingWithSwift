@@ -11,13 +11,16 @@ import UIKit
 class ViewController: UITableViewController {
 
     var countries = [String]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+    navigationController?.navigationBar.prefersLargeTitles = true
+        
         title = "Country"
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
-       
+        countries.sort()
         
     }
 
@@ -29,6 +32,17 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Countries", for: indexPath)
         cell.textLabel?.text = countries[indexPath.row].capitalized
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            // 2: success! Set its selectedImage property
+            vc.selectedImage = countries[indexPath.row]
+
+            // 3: now push it onto the navigation controller
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
