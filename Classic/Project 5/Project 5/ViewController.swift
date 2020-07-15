@@ -62,9 +62,7 @@ class ViewController: UITableViewController {
     
     func submit(_ answer: String) {
         let lowerAnswer = answer.lowercased()
-        
-        let errorTitle: String
-        let errorMessage: String
+
 
         if isPossible(word: lowerAnswer) {
             if isOriginal(word: lowerAnswer) {
@@ -76,23 +74,14 @@ class ViewController: UITableViewController {
                     
                     return
                 } else {
-                    errorTitle = "Word not recognised"
-                    errorMessage = "You can't just make them up, you know!"
+                    showErrorMessage(error: "isReal")
                 }
             } else {
-                errorTitle = "Word used already"
-                errorMessage = "Be more original!"
+                showErrorMessage(error: "isOriginal")
             }
         } else {
-            guard let title = title?.lowercased() else { return }
-            
-            errorTitle = "Word not possible"
-            errorMessage = " You can't spell that word rom \(title)"
+            showErrorMessage(error: "isPossible")
         }
-        
-        let ac = UIAlertController(title: title, message: errorMessage, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
     }
     
     func isPossible(word: String) -> Bool {
@@ -116,8 +105,49 @@ class ViewController: UITableViewController {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+
+        var testWord: String = ""
+
+        for char in word {
+            var i = 0
+            
+            if i == 3 {
+                break
+            }
+            testWord.append(char)
+            i += 1
+        }
         
+        if word.count == 3 || (title?.hasPrefix(testWord) ?? true && word.count == 3) {
+            return false
+        }
         return misspelledRange.location == NSNotFound
+    }
+    
+    func showErrorMessage(error: String) {
+        let errorTitle: String
+        let errorMessage: String
+        
+        switch error {
+        case "isReal":
+            errorTitle = "Word not recognised"
+            errorMessage = "You can't just make them up, you know!"
+        case "isOriginal":
+            errorTitle = "Word used already"
+            errorMessage = "Be more original!"
+        case "isPossible":
+            guard let title = title?.lowercased() else { return }
+            
+            errorTitle = "Word not possible"
+            errorMessage = " You can't spell that word rom \(title)"
+        default:
+            errorTitle = "Error"
+            errorMessage = "Error not found"
+        }
+        
+        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
 
 }
