@@ -9,14 +9,13 @@
         <!--View Controller-->
         <scene sceneID="M6o-xr-UMf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2iH-Tb-2Oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Xc2-vs-sQv" customClass="ViewController" customModule="Consolidation_3" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZU7-US-rYf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Word" id="MgP-n7-D9e">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="List" id="MgP-n7-D9e">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MgP-n7-D9e" id="Ws4-ny-byy">
@@ -32,13 +31,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="YZk-lp-XSx"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2iH-Tb-2Oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1163.768115942029" y="88.392857142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z1Y-et-C6k">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fml-Dc-8Pm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fI3-aT-AJS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Xw-kK-cMq">
@@ -50,6 +49,7 @@
                         <segue destination="Xc2-vs-sQv" kind="relationship" relationship="rootViewController" id="eFd-ew-UmI"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fml-Dc-8Pm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="253.62318840579712" y="88.392857142857139"/>
         </scene>

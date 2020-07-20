@@ -10,11 +10,17 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    var shoppingList = [String]()
+    var selctedString: String?
+    var shoppingList = [String]() {
+        didSet {
+            title = "My purchases: \(shoppingList.count)"
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(purchases))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New", style: .plain, target: self, action: #selector(startApp))
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareMyPurchases)), UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(purchases))]
         
        startApp()
     }
@@ -24,18 +30,41 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "Word", for: indexPath)
+        let cell =  tableView.dequeueReusableCell(withIdentifier: "List", for: indexPath)
         cell.textLabel?.text = shoppingList[indexPath.row]
         return cell
     }
     
-    func startApp()
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let ac = UIAlertController(title: "Delete", message: "Do you want to delete \(shoppingList[indexPath.row])?", preferredStyle: .alert)
+        let submitYes = UIAlertAction(title: "Yes", style: .destructive) {  _ in
+            self.remove(indexPath.row)
+        }
+        let submitCancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        
+        ac.addAction(submitCancel)
+        ac.addAction(submitYes)
+        present(ac, animated: true)
+        
+    }
+    
+    @objc func shareMyPurchases() {
+        var text = "My shopping list:\n"
+        
+        text += shoppingList.joined(separator: "\n")
+
+        let vc = UIActivityViewController(activityItems: [text], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
+    }
+    
+    @objc func startApp()
     {
         title = "My purchases: \(shoppingList.count)"
         shoppingList.removeAll()
         tableView.reloadData()
-        
-        print(1)/////////////////
     }
     
     @objc   func purchases() {
@@ -44,9 +73,16 @@ class ViewController: UITableViewController {
         
         let submitAction = UIAlertAction(title: "Add", style: .default) { [weak self, weak ac] action in
             guard let product = ac?.textFields?[0].text else { return }
+            let testProbel: String = product.replacingOccurrences(of: " ", with: "")
+            
+            if testProbel.isEmpty {
+                return
+            }
+            
             self?.submit(product)
         }
         
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(submitAction)
         present(ac, animated: true)
     }
@@ -57,6 +93,14 @@ class ViewController: UITableViewController {
         
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
+        
+        return
+    }
+    
+    func remove(_ product: Int) {
+        shoppingList.remove(at: product)
+        let indexPath = IndexPath(row: product, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
         
         return
     }
