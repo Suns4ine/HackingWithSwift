@@ -11,17 +11,23 @@ import UIKit
 class ViewController: UITableViewController {
 
     var petitions = [Petition]()
+    var filtredPetitions = [Petition]()
+    var arrayPetitions = [Petition]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
         let urlString: String
+
         
         if navigationController?.tabBarItem.tag == 0 {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
         } else {
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .done, target: self, action: #selector(printAPI))
+        self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPetition)), UIBarButtonItem(title: "Clear", style: .done, target: self, action: #selector(clearSearch))]
         
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
@@ -30,17 +36,60 @@ class ViewController: UITableViewController {
             }
         }
         
+
+        
+        
         showError()
         
     }
     
+    @objc func clearSearch() {
+        
+        filtredPetitions.removeAll()
+        arrayPetitions = petitions
+        tableView.reloadData()
+    }
+    
+    @objc func printAPI() {
+        let ac = UIAlertController(title: "Warning", message: "The Data comes from the We The People API of the Whitehouse", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        
+        present(ac, animated: true)
+    }
+    
+    @objc func searchPetition() {
+        let ac = UIAlertController(title: "Search", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        let search = UIAlertAction(title: "Find", style: .default) { [petitions, weak self, weak ac] _ in
+            
+            guard let text = ac?.textFields?[0].text else { return }
+            self?.filtredPetitions.removeAll()
+            
+            for petit in petitions {
+                if petit.title.lowercased().contains(text.lowercased()) {
+                    self?.filtredPetitions.append(petit)
+                }
+            }
+            
+            self?.arrayPetitions = self?.filtredPetitions ?? petitions
+            self?.tableView.reloadData()
+            
+            
+        }
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(search)
+        present(ac, animated: true)
+        
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count
+        return arrayPetitions.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let petition = petitions[indexPath.row]
+        let petition = arrayPetitions[indexPath.row]
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
         
@@ -49,7 +98,7 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailViewController()
-        vc.detailItem = petitions[indexPath.row]
+        vc.detailItem = arrayPetitions[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -58,6 +107,8 @@ class ViewController: UITableViewController {
         
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
+            
+            arrayPetitions = petitions
             tableView.reloadData()
         }
     }
