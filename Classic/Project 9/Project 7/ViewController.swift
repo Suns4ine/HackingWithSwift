@@ -32,11 +32,12 @@ class ViewController: UITableViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {
-                   parse(json: data)
+                    self.parse(json: data)
                     return
                 }
             }
         }
+        
 
         
         
