@@ -17,32 +17,14 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        let urlString: String
-
         
-        if navigationController?.tabBarItem.tag == 0 {
-            urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
-        } else {
-            urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
-        }
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .done, target: self, action: #selector(printAPI))
-        self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPetition)), UIBarButtonItem(title: "Clear", style: .done, target: self, action: #selector(clearSearch))]
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let url = URL(string: urlString) {
-                if let data = try? Data(contentsOf: url) {
-                    self.parse(json: data)
-                    return
-                }
-            }
-        }
+      //  self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .done, target: self, action: #selector(printAPI))
+        //self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchPetition)), UIBarButtonItem(title: "Clear", style: .done, target: self, action: #selector(clearSearch))]
+       performSelector(inBackground: #selector(fetchJSON), with: nil)
+       
         
 
-        
-        
-        showError()
-        
     }
     
     @objc func clearSearch() {
@@ -85,6 +67,31 @@ class ViewController: UITableViewController {
         
     }
     
+    @objc func fetchJSON() {
+        let urlString: String
+
+        
+        if navigationController?.tabBarItem.tag == 0 {
+            urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
+        } else {
+            urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
+        }
+        
+        //DispatchQueue.global(qos: .userInitiated).async {
+                   if let url = URL(string: urlString) {
+                       if let data = try? Data(contentsOf: url) {
+                           self.parse(json: data)
+                           return
+                       }
+                   }
+
+                   
+                   
+            performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
+                   
+          //     }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayPetitions.count
     }
@@ -111,15 +118,19 @@ class ViewController: UITableViewController {
             petitions = jsonPetitions.results
             
             arrayPetitions = petitions
-            tableView.reloadData()
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+        } else {
+            tableView.performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
     }
     
-    func showError() {
-        let ac = UIAlertController(title: "Loading eroor", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-    }
+    @objc func showError() {
+        //DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Loading eroor", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        }
+    //}
     
 }
 
