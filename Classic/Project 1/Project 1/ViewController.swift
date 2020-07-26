@@ -15,20 +15,9 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
-
-
-        let fm = FileManager.default
-        let path = Bundle.main.resourcePath!
-        let items = try! fm.contentsOfDirectory(atPath: path)
         
-        for item in items {
-            if item.hasPrefix("nssl") {
+        performSelector(inBackground: #selector(addPicture), with: nil)
 
-                pictures.append(item)
-            }
-            pictures.sort()
-        }
-                print(pictures)
         // Do any additional setup after loading the view.
     }
 
@@ -49,6 +38,21 @@ class ViewController: UITableViewController {
             vc.maxArrayPicture = String(pictures.count)
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    @objc func addPicture() {
+        let fm = FileManager.default
+             let path = Bundle.main.resourcePath!
+             let items = try! fm.contentsOfDirectory(atPath: path)
+             
+             for item in items {
+                 if item.hasPrefix("nssl") {
+
+                    self.pictures.append(item)
+                 }
+                self.pictures.sort()
+            }
+        self.tableView.reloadData()
     }
 }
 
