@@ -32,15 +32,16 @@ class ViewController: UITableViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {
-                   parse(json: data)
+                    self.parse(json: data)
                     return
                 }
             }
+            self.showError()
         }
 
         
         
-        showError()
+        //showError()
         
     }
     
@@ -110,15 +111,18 @@ class ViewController: UITableViewController {
             petitions = jsonPetitions.results
             
             arrayPetitions = petitions
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
     func showError() {
-        let ac = UIAlertController(title: "Loading eroor", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Loading eroor", message: "There was a problem loading the feed; please check your connection and try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        }
     }
-    
 }
 
