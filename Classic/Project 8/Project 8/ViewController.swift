@@ -225,11 +225,12 @@ class ViewController: UIViewController {
         
         letterBits.shuffle()
 
-        
-        if letterBits.count == letterButtons.count {
-            for i in 0 ..< letterButtons.count {
-                letterButtons[i].setTitle(letterBits[i], for: .normal)
+        DispatchQueue.main.async {
+            if letterBits.count == self.letterButtons.count {
+                for i in 0 ..< self.letterButtons.count {
+                    self.letterButtons[i].setTitle(letterBits[i], for: .normal)
             }
+        }
         }
     }
     

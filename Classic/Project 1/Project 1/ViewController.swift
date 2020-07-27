@@ -52,7 +52,9 @@ class ViewController: UITableViewController {
                  }
                 self.pictures.sort()
             }
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
