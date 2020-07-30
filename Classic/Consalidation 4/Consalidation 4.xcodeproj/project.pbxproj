@@ -13,6 +13,7 @@
 		121FC3C224CF6EAE00A044F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 121FC3C024CF6EAE00A044F5 /* Main.storyboard */; };
 		121FC3C424CF6EAF00A044F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 121FC3C324CF6EAF00A044F5 /* Assets.xcassets */; };
 		121FC3C724CF6EAF00A044F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 121FC3C524CF6EAF00A044F5 /* LaunchScreen.storyboard */; };
+		12FEA4AC24D31A8D000BE05E /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12FEA4AB24D31A8D000BE05E /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		121FC3C324CF6EAF00A044F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		121FC3C624CF6EAF00A044F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		121FC3C824CF6EAF00A044F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12FEA4AB24D31A8D000BE05E /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				121FC3C024CF6EAE00A044F5 /* Main.storyboard */,
 				121FC3C324CF6EAF00A044F5 /* Assets.xcassets */,
 				121FC3C524CF6EAF00A044F5 /* LaunchScreen.storyboard */,
+				12FEA4AB24D31A8D000BE05E /* start.txt */,
 				121FC3C824CF6EAF00A044F5 /* Info.plist */,
 			);
 			path = "Consalidation 4";
@@ -126,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				121FC3C724CF6EAF00A044F5 /* LaunchScreen.storyboard in Resources */,
+				12FEA4AC24D31A8D000BE05E /* start.txt in Resources */,
 				121FC3C424CF6EAF00A044F5 /* Assets.xcassets in Resources */,
 				121FC3C224CF6EAE00A044F5 /* Main.storyboard in Resources */,
 			);
