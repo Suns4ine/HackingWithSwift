@@ -17,8 +17,9 @@ class ViewController: UIViewController {
     
     var arrayWord = [String]()
     var useChar = [String]()
-    var word = ""
+    var checkSymbol = ""
     var promtWord = ""
+    var word = ""
     var point = 10 {
         didSet {
             lifeLabel.text = "Your point to life: \(point)"
@@ -77,7 +78,34 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         performSelector(inBackground: #selector(loadWord), with: nil)
     }
-
+    
+    @objc func charTapped(_ sender: UIButton) {
+         var charred = ""
+         let ac = UIAlertController(title: "Enter", message: nil, preferredStyle: .alert)
+         ac.addTextField()
+         
+         let submitChar = UIAlertAction(title: "Add", style: .default) { [weak self, weak ac]  _ in
+            guard let product = ac?.textFields?[0].text else { return }
+            charred = self?.clearTab(product) ?? ""
+            
+             if charred.isEmpty { return }
+            
+             self?.checkSymbol = charred
+             self?.useChar.append(charred)
+             self?.checkWord()
+         }
+         
+         ac.addAction(submitChar)
+         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+         
+         present(ac, animated: true)
+         
+    }
+    
+    @objc func newTapped(_ sender: UIButton) {
+        newGame()
+    }
+    
     @objc func loadWord() {
         
         if let wordFileURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
@@ -91,20 +119,24 @@ class ViewController: UIViewController {
             return
         }
         
-        useWord()
-        
+        self.useWord()
     }
     
     func useWord() {
-        word = arrayWord.randomElement()?.lowercased() ?? "what"
+        word = arrayWord.randomElement()!.lowercased()
         
-        performSelector(onMainThread: #selector(checkWord), with: nil, waitUntilDone: false)
+        for _ in 0..<word.count {
+            promtWord += "?"
+        }
+        
+        DispatchQueue.main.async {
+            self.printWord()
+        }
     }
     
     @objc func checkWord() {
         
         var flag = 0
-        
         promtWord = ""
         
         for letter in word {
@@ -112,16 +144,18 @@ class ViewController: UIViewController {
 
             if useChar.contains(strLetter) {
                 promtWord += strLetter
-                flag = 1
             } else {
                 promtWord += "?"
             }
+            
+            if letter == Character(checkSymbol) {
+                flag = 1
+            }
         }
         
-        print(useChar)
-        checkFlag(flag)
-        flag = 0
+        checkSymbol = ""
         
+        checkFlag(flag)
         printWord()
     }
     
@@ -130,7 +164,9 @@ class ViewController: UIViewController {
         
         if promtWord == word {
             let ac = UIAlertController(title: "WIN", message: "You won!!!\nDo you want to play more?", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Yes", style: .default))
+            ac.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+                self?.newGame()
+            })
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             
             present(ac, animated: true)
@@ -138,7 +174,13 @@ class ViewController: UIViewController {
     }
     
     func newGame() {
-        textButton.isEnabled = false
+        textButton.isEnabled = true
+        useChar.removeAll()
+        checkSymbol = ""
+        promtWord = ""
+        point = 10
+        useWord()
+        
     }
     
     func checkFlag(_ flag: Int) {
@@ -150,7 +192,7 @@ class ViewController: UIViewController {
         }
         
         if point == 0 {
-            let ac = UIAlertController(title: "Lose", message: "You lose", preferredStyle: .alert)
+            let ac = UIAlertController(title: "Lose", message: "This word is \(word)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
             textButton.isEnabled = false
             
@@ -158,46 +200,9 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func newTapped(_ sender: UIButton) {
-        newGame()
-    }
-    
-    @objc func charTapped(_ sender: UIButton) {
-        var charred = ""
-        let ac = UIAlertController(title: "Enter", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        
-        let submitChar = UIAlertAction(title: "Add", style: .default) { [weak self, weak ac]  _ in
-            guard let product = ac?.textFields?[0].text else { return }
-            charred = self?.clearTab(product) ?? ""
-            let testProbel: String = product.replacingOccurrences(of: " ", with: "")
-            
-            if testProbel.isEmpty {
-                return
-            }
-            charred = String(product[product.startIndex]).lowercased()
-            
-            if charred.isEmpty {
-                return
-            }
-            
-            self?.useChar.append(charred)
-            self?.checkWord()
-        
-        }
-        
-        ac.addAction(submitChar)
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        present(ac, animated: true)
-        
-        }
-    
     func clearTab(_ word: String) -> String {
         var slow = word.replacingOccurrences(of: " ", with: "")
-        if slow.isEmpty {
-            return ""
-        }
+        if slow.isEmpty { return "" }
         slow = String(slow[slow.startIndex]).lowercased()
         return slow
     }
