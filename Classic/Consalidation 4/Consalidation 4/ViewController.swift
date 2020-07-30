@@ -48,10 +48,17 @@ class ViewController: UIViewController {
         view.addSubview(newGameButton)
         
         NSLayoutConstraint.activate([
-            lifeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-            wordLabel.topAnchor.constraint(equalTo: lifeLabel.topAnchor, constant: 40),
-            textButton.topAnchor.constraint(equalTo: wordLabel.topAnchor, constant: 40),
-            newGameButton.topAnchor.constraint(equalTo: textButton.topAnchor, constant: 40)
+            lifeLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.layoutMarginsGuide.topAnchor, multiplier: 5),
+            lifeLabel.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 15),
+            wordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //wordLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            wordLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 1),
+            wordLabel.heightAnchor.constraint(equalToConstant: 200),
+            //wordLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.layoutMarginsGuide.topAnchor, multiplier: 20),
+            textButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textButton.topAnchor.constraint(equalToSystemSpacingBelow: wordLabel.bottomAnchor, multiplier: 2),
+            newGameButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -50),
+            newGameButton.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 30)
         ])
         // Do any additional setup after loading the view.
     }
