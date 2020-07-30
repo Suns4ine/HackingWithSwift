@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var wordLabel: UILabel!
     var textButton: UIButton!
     var newGameButton: UIButton!
+    var helpButton: UIButton!
     
     var arrayWord = [String]()
     var useChar = [String]()
@@ -56,6 +57,12 @@ class ViewController: UIViewController {
         newGameButton.addTarget(self, action: #selector(newTapped), for: .touchUpInside)
         view.addSubview(newGameButton)
         
+        helpButton = UIButton(type: .system)
+        helpButton.translatesAutoresizingMaskIntoConstraints = false
+        helpButton.setTitle("Help", for: .normal)
+        helpButton.addTarget(self, action: #selector(helpTapped), for: .touchUpInside)
+        view.addSubview(helpButton)
+        
         NSLayoutConstraint.activate([
             lifeLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.layoutMarginsGuide.topAnchor, multiplier: 5),
             lifeLabel.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 15),
@@ -70,7 +77,11 @@ class ViewController: UIViewController {
             textButton.topAnchor.constraint(equalToSystemSpacingBelow: wordLabel.bottomAnchor, multiplier: 2),
             
             newGameButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -50),
-            newGameButton.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 30)
+            newGameButton.safeAreaLayoutGuide.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor, constant: 30),
+            
+            helpButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -50),
+            helpButton.safeAreaLayoutGuide.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor, constant: -30)
+            
         ])
     }
     
@@ -104,6 +115,19 @@ class ViewController: UIViewController {
     
     @objc func newTapped(_ sender: UIButton) {
         newGame()
+    }
+    
+    @objc func helpTapped(_ sender: UIButton) {
+        
+        let ac = UIAlertController(title: "Carefully", message: "The hint gives a letter but takes 2 points away.\nIf you have 2 or less points, then don't use it.", preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+            self?.help()
+        })
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
+        
     }
     
     @objc func loadWord() {
@@ -185,13 +209,17 @@ class ViewController: UIViewController {
     
     func checkFlag(_ flag: Int) {
         
-        if flag == 1 {
+        switch flag {
+        case 1:
             return
-        } else {
+        case 2:
+            break
+        default:
             point -= 1
         }
         
-        if point == 0 {
+        
+        if point <= 0 {
             let ac = UIAlertController(title: "Lose", message: "This word is \(word)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
             textButton.isEnabled = false
@@ -207,5 +235,24 @@ class ViewController: UIViewController {
         return slow
     }
 
+    func help() {
+        point -= 2
+        
+        if point <= 0 {
+            checkFlag(2)
+        }
+        
+        for letter in word {
+            let strLetter = String(letter)
+            
+                if !useChar.contains(strLetter) {
+                    checkSymbol = String(letter)
+                    useChar.append(checkSymbol)
+                     break
+            }
+        }
+         checkWord()
+        
+    }
 }
 
