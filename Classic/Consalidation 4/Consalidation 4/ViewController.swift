@@ -46,11 +46,13 @@ class ViewController: UIViewController {
         textButton = UIButton(type: .system)
         textButton.translatesAutoresizingMaskIntoConstraints = false
         textButton.setTitle("submit", for: .normal)
+        textButton.addTarget(self, action: #selector(charTapped), for: .touchUpInside)
         view.addSubview(textButton)
         
         newGameButton = UIButton(type: .system)
         newGameButton.translatesAutoresizingMaskIntoConstraints = false
         newGameButton.setTitle("New Game", for: .normal)
+        newGameButton.addTarget(self, action: #selector(newTapped), for: .touchUpInside)
         view.addSubview(newGameButton)
         
         NSLayoutConstraint.activate([
@@ -81,11 +83,6 @@ class ViewController: UIViewController {
         if let wordFileURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let wordContent = try? String(contentsOf: wordFileURL) {
                 arrayWord = wordContent.components(separatedBy: "\n")
-            } else {
-                let ac = UIAlertController(title: "Ooops.....", message: "We were unable to download the words from the file.", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
-                
-                present(ac, animated: true)
             }
         }
         
@@ -99,7 +96,7 @@ class ViewController: UIViewController {
     }
     
     func useWord() {
-        word = arrayWord.randomElement() ?? "what"
+        word = arrayWord.randomElement()?.lowercased() ?? "what"
         
         performSelector(onMainThread: #selector(checkWord), with: nil, waitUntilDone: false)
     }
@@ -107,6 +104,8 @@ class ViewController: UIViewController {
     @objc func checkWord() {
         
         var flag = 0
+        
+        promtWord = ""
         
         for letter in word {
             let strLetter = String(letter)
@@ -119,7 +118,9 @@ class ViewController: UIViewController {
             }
         }
         
+        print(useChar)
         checkFlag(flag)
+        flag = 0
         
         printWord()
     }
@@ -137,7 +138,7 @@ class ViewController: UIViewController {
     }
     
     func newGame() {
-        
+        textButton.isEnabled = false
     }
     
     func checkFlag(_ flag: Int) {
@@ -151,9 +152,54 @@ class ViewController: UIViewController {
         if point == 0 {
             let ac = UIAlertController(title: "Lose", message: "You lose", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
+            textButton.isEnabled = false
             
             present(ac, animated: true)
         }
+    }
+    
+    @objc func newTapped(_ sender: UIButton) {
+        newGame()
+    }
+    
+    @objc func charTapped(_ sender: UIButton) {
+        var charred = ""
+        let ac = UIAlertController(title: "Enter", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        let submitChar = UIAlertAction(title: "Add", style: .default) { [weak self, weak ac]  _ in
+            guard let product = ac?.textFields?[0].text else { return }
+            charred = self?.clearTab(product) ?? ""
+            let testProbel: String = product.replacingOccurrences(of: " ", with: "")
+            
+            if testProbel.isEmpty {
+                return
+            }
+            charred = String(product[product.startIndex]).lowercased()
+            
+            if charred.isEmpty {
+                return
+            }
+            
+            self?.useChar.append(charred)
+            self?.checkWord()
+        
+        }
+        
+        ac.addAction(submitChar)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
+        
+        }
+    
+    func clearTab(_ word: String) -> String {
+        var slow = word.replacingOccurrences(of: " ", with: "")
+        if slow.isEmpty {
+            return ""
+        }
+        slow = String(slow[slow.startIndex]).lowercased()
+        return slow
     }
 
 }
