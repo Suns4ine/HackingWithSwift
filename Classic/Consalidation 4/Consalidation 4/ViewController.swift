@@ -199,6 +199,7 @@ class ViewController: UIViewController {
     
     func newGame() {
         textButton.isEnabled = true
+        helpButton.isEnabled = true
         useChar.removeAll()
         checkSymbol = ""
         promtWord = ""
@@ -223,6 +224,7 @@ class ViewController: UIViewController {
             let ac = UIAlertController(title: "Lose", message: "This word is \(word)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Ok", style: .cancel))
             textButton.isEnabled = false
+            helpButton.isEnabled = false
             
             present(ac, animated: true)
         }
