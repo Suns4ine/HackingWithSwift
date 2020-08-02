@@ -12,6 +12,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
 
     var people = [Person]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,18 +46,19 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let person = people[indexPath.item]
         
-        let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        ac.addAction(UIAlertAction(title: "Ok", style: .default) { [weak self, weak ac] _ in
-            guard let newName = ac?.textFields?[0].text else { return }
-            person.name = newName
+        if person.name == "Unknown" {
+            rename(person: person)
+        } else {
+            let ac = UIAlertController(title: "More details", message: "do you really want to change this name?", preferredStyle: .alert)
             
-            self?.collectionView.reloadData()
-        })
+            ac.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in self?.rename(person: person) })
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            
+            present(ac, animated: true)
+        }
         
-        present(ac, animated: true)
+        
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -83,11 +85,31 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     
     
     @objc func addNewPerson() {
+        
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
+        if UIImagePickerController.isSourceTypeAvailable(.camera) { picker.sourceType = .camera }
+        
         present(picker, animated: true)
+        
     }
 
+    func rename(person: Person) {
+        
+        let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Ok", style: .default) { [weak self, weak ac] _ in
+            guard let newName = ac?.textFields?[0].text else { return }
+            person.name = newName
+            
+            self?.collectionView.reloadData()
+        })
+        
+        present(ac, animated: true)
+    }
+    
 }
 
