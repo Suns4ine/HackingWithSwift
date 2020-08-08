@@ -65,13 +65,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.location(in: self)
-            let ball = SKSpriteNode(imageNamed: "ballRed")
-            ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
-            ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-            ball.physicsBody?.restitution = 0.4
-            ball.position = location
-            ball.name = "ball"
-            addChild(ball)
+            
+            let objects = nodes(at: location)
+            
+            if objects.contains(editLabel) {
+                editingMode.toggle()
+            } else {
+                if editingMode {
+                    let size = CGSize(width: Int.random(in: 16...128), height: 16)
+                    let box = SKSpriteNode(color: UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: CGFloat.random(in: 0...1)), size: size)
+                    box.zRotation = CGFloat.random(in: 0...3)
+                    box.position = location
+                    
+                    box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
+                    box.physicsBody?.isDynamic = false
+                    
+                    addChild(box)
+                } else {
+                    let ball = SKSpriteNode(imageNamed: "ballRed")
+                    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
+                    ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
+                    ball.physicsBody?.restitution = 0.4
+                    ball.position = location
+                    ball.name = "ball"
+                    addChild(ball)
+                }
+            }
         }
     }
     
