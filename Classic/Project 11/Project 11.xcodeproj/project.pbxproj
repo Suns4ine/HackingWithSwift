@@ -14,6 +14,7 @@
 		1254F5ED24D9FB3500D71BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1254F5EB24D9FB3500D71BE4 /* Main.storyboard */; };
 		1254F5EF24D9FB3700D71BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1254F5EE24D9FB3700D71BE4 /* Assets.xcassets */; };
 		1254F5F224D9FB3700D71BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1254F5F024D9FB3700D71BE4 /* LaunchScreen.storyboard */; };
+		126734FC24DE376E00806124 /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 126734FB24DE376E00806124 /* FireParticles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		1254F5EE24D9FB3700D71BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1254F5F124D9FB3700D71BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1254F5F324D9FB3700D71BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		126734FB24DE376E00806124 /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				1254F5EB24D9FB3500D71BE4 /* Main.storyboard */,
 				1254F5EE24D9FB3700D71BE4 /* Assets.xcassets */,
 				1254F5F024D9FB3700D71BE4 /* LaunchScreen.storyboard */,
+				126734FB24DE376E00806124 /* FireParticles.sks */,
 				1254F5F324D9FB3700D71BE4 /* Info.plist */,
 			);
 			path = "Project 11";
@@ -130,6 +133,7 @@
 			files = (
 				1254F5ED24D9FB3500D71BE4 /* Main.storyboard in Resources */,
 				1254F5E424D9FB3500D71BE4 /* GameScene.sks in Resources */,
+				126734FC24DE376E00806124 /* FireParticles.sks in Resources */,
 				1254F5EF24D9FB3700D71BE4 /* Assets.xcassets in Resources */,
 				1254F5F224D9FB3700D71BE4 /* LaunchScreen.storyboard in Resources */,
 			);
