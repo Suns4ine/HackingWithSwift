@@ -9,6 +9,26 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    var scoreLabel : SKLabelNode!
+    var editLabel: SKLabelNode!
+    
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+    
+    var editingMode: Bool = false {
+        didSet {
+            if editingMode {
+                editLabel.text = "Done"
+            } else {
+                editLabel.text = "Edit"
+            }
+        }
+    }
+    
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
         background.position = CGPoint(x: 512, y: 384)
@@ -28,6 +48,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeSlot(t: CGPoint(x: 384, y: 0), isGood: false)
         makeSlot(t: CGPoint(x: 640, y: 0), isGood: true)
         makeSlot(t: CGPoint(x: 896, y: 0), isGood: false)
+        
+        scoreLabel = SKLabelNode(fontNamed: "Chalkudster")
+        scoreLabel.text = "Score: 0"
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.position = CGPoint(x: 980, y: 700)
+        addChild(scoreLabel)
+        
+        editLabel = SKLabelNode(fontNamed: "Chalkduster")
+        editLabel.text = "Edit"
+        editLabel.position = CGPoint(x: 80, y:  700)
+        addChild(editLabel)
         
     }
 
@@ -78,5 +109,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(slotBase)
         addChild(slotGlow)
+    }
+    
+    func collisionBetween(ball: SKNode, object: SKNode) {
+        if object.name == "good" {
+            destroy(ball: ball)
+            score += 1
+        } else if object.name == "bad" {
+            destroy(ball: ball)
+            score -= 1
+        }
+    }
+    
+    func destroy(ball: SKNode) {
+        ball.removeFromParent()
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        
+        if nodeA.name == "ball" {
+            collisionBetween(ball: nodeA, object: nodeB)
+        } else if nodeB.name == "ball" {
+            collisionBetween(ball: nodeB, object: nodeA)
+        }
     }
 }
