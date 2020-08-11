@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UITableViewController {
 
     var pictures = [String]()
+    var cells = [Cell]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Storm Viewer"
@@ -18,6 +20,7 @@ class ViewController: UITableViewController {
         
         performSelector(inBackground: #selector(addPicture), with: nil)
 
+        
         // Do any additional setup after loading the view.
     }
 
@@ -49,11 +52,19 @@ class ViewController: UITableViewController {
                  if item.hasPrefix("nssl") {
 
                     self.pictures.append(item)
+                    save()
                  }
                 self.pictures.sort()
             }
         DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+    }
+    
+    func save() {
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: cells, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "cells")
         }
     }
 }
