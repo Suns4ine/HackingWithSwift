@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12373A0324E4AD16007CB28D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12373A0224E4AD16007CB28D /* Photo.swift */; };
 		12C7E3B824E4768A00589C5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7E3B724E4768A00589C5A /* AppDelegate.swift */; };
 		12C7E3BA24E4768A00589C5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7E3B924E4768A00589C5A /* SceneDelegate.swift */; };
 		12C7E3BC24E4768A00589C5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7E3BB24E4768A00589C5A /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12373A0224E4AD16007CB28D /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		12C7E3B424E4768A00589C5A /* Consolidation 5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Consolidation 5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C7E3B724E4768A00589C5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12C7E3B924E4768A00589C5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				12C7E3B724E4768A00589C5A /* AppDelegate.swift */,
 				12C7E3B924E4768A00589C5A /* SceneDelegate.swift */,
 				12C7E3BB24E4768A00589C5A /* ViewController.swift */,
+				12373A0224E4AD16007CB28D /* Photo.swift */,
 				12C7E3BD24E4768A00589C5A /* Main.storyboard */,
 				12C7E3C024E4768C00589C5A /* Assets.xcassets */,
 				12C7E3C224E4768C00589C5A /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12373A0324E4AD16007CB28D /* Photo.swift in Sources */,
 				12C7E3BC24E4768A00589C5A /* ViewController.swift in Sources */,
 				12C7E3B824E4768A00589C5A /* AppDelegate.swift in Sources */,
 				12C7E3BA24E4768A00589C5A /* SceneDelegate.swift in Sources */,
