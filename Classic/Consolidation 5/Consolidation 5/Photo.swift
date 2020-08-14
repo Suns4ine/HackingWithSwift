@@ -6,7 +6,8 @@
 //  Copyright © 2020 Vyacheslav Pronin. All rights reserved.
 //
 
-import Foundation
+//import Foundation
+import UIKit
 
 class Photo: NSObject, Codable {
   var name: String

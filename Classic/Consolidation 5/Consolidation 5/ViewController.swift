@@ -30,20 +30,21 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            guard let image = info[.editedImage] as? UIImage else { return }
-            
+        
+        guard let image = info[.originalImage] as? UIImage else { return }
+        
             let imageName = UUID().uuidString
             let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
             
             if let jpegData = image.jpegData(compressionQuality: 0.8) {
                 try? jpegData.write(to: imagePath)
-                
-                let photo =  Photo(name: "Unknown", image: imageName)
-                photos.append(photo)
-                tableView.reloadData()
-            
-            dismiss(animated: true)
         }
+        
+        let photo =  Photo(name: "Unknown", image: imageName)
+        photos.append(photo)
+        
+        tableView.reloadData()
+            dismiss(animated: true)
     }
     
     func getDocumentsDirectory() -> URL {
