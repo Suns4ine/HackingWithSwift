@@ -12,6 +12,8 @@ class DetailViewController: UIViewController {
 
     @IBOutlet var imageView: UIImageView!
     var selectedImage: String?
+    var namePhoto: String = ""
+    var photo: Photo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,19 +21,25 @@ class DetailViewController: UIViewController {
         if let imageToload = selectedImage {
             print(imageToload)
             imageView.image = UIImage(named: imageToload)
+            title = namePhoto
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "More", style: .done, target: self, action: #selector(settingPhoto))
+        
+        
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   @objc func settingPhoto() {
+          let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+          ac.addAction(UIAlertAction(title: "To share", style: .default, handler: nil ))
+    ac.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
+        
+          })
+          ac.addAction(UIAlertAction(title: "Delete", style: .default, handler: nil))
+          ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+          
+          present(ac, animated: true)
+      }
 
 }

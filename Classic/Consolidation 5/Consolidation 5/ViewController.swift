@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    class ViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var photos = [Photo]()
     var counter = 0
@@ -34,6 +34,8 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             let path = getDocumentsDirectory().appendingPathComponent(photos[indexPath.row].image)
             vc.selectedImage = path.path
+            vc.namePhoto = photos[indexPath.row].name
+            vc.photo = photos[indexPath.row]
             
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -71,7 +73,7 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
         present(picker, animated: true)
     }
     
-    func rename(photo: Photo) {
+    open func rename(photo: Photo) {
         let cell = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
         cell.addTextField()
         
@@ -91,5 +93,7 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
         present(cell, animated: true)
     }
 
+   
+    
 }
 
