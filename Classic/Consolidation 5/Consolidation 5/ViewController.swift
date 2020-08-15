@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var photos = [Photo]()
+    var counter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,15 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            let path = getDocumentsDirectory().appendingPathComponent(photos[indexPath.row].image)
+            vc.selectedImage = path.path
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let image = info[.originalImage] as? UIImage else { return }
@@ -40,8 +50,9 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
                 try? jpegData.write(to: imagePath)
         }
         
-        let photo =  Photo(name: "Unknown", image: imageName)
-        photos.append(photo)
+        counter += 1
+        let photo =  Photo(name: "Photo Number: \(counter)", image: imageName)
+        photos.insert(photo, at: 0)
         
         tableView.reloadData()
             dismiss(animated: true)
@@ -55,9 +66,29 @@ class ViewController: UITableViewController, UIImagePickerControllerDelegate, UI
     @objc func add() {
         let picker = UIImagePickerController()
         picker.delegate = self
-        //if UIImagePickerController.isSourceTypeAvailable(.camera) { picker.sourceType = .camera }
+        if UIImagePickerController.isSourceTypeAvailable(.camera) { picker.sourceType = .camera }
         
         present(picker, animated: true)
+    }
+    
+    func rename(photo: Photo) {
+        let cell = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
+        cell.addTextField()
+        
+        cell.addAction(UIAlertAction(title: "Yes", style: .default){ [weak cell, weak self] _ in
+            guard let newName = cell?.textFields?[0].text else { return }
+            photo.name = newName
+            
+            self?.tableView.reloadData()
+        })
+        cell.addAction(UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+            self?.counter += 1
+            photo.name = "Photo Number: \(self?.counter ?? 0)"
+            
+            self?.tableView.reloadData()
+        })
+        
+        present(cell, animated: true)
     }
 
 }
