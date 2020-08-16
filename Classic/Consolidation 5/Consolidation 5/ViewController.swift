@@ -16,6 +16,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
         // Do any additional setup after loading the view.
     }
@@ -36,6 +37,7 @@ import UIKit
             vc.selectedImage = path.path
             vc.namePhoto = photos[indexPath.row].name
             vc.photo = photos[indexPath.row]
+            vc.table = self
             
             navigationController?.pushViewController(vc, animated: true)
         }
