@@ -15,7 +15,6 @@ class DetailViewController: UIViewController {
     var selectedImage: String?
     var namePhoto: String = ""
     var photo: Photo?
-    var table: UITableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +37,10 @@ class DetailViewController: UIViewController {
         self?.chareTapped()
         
     })
-        ac.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self, weak table] _ in
-            
+        ac.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
+            self?.rename(photo: self?.photo)
           })
-          ac.addAction(UIAlertAction(title: "Delete", style: .default, handler: nil))
+          //ac.addAction(UIAlertAction(title: "Delete", style: .default, handler: nil))
           ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
           
           present(ac, animated: true)
@@ -53,5 +52,19 @@ class DetailViewController: UIViewController {
         let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
+    }
+    
+    func rename(photo: Photo?) {
+        guard photo != nil else { return }
+        let cell = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
+        cell.addTextField()
+        
+        cell.addAction(UIAlertAction(title: "Yes", style: .default){ [weak cell] _ in
+            guard let newName = cell?.textFields?[0].text else { return }
+            photo!.name = newName
+        })
+        cell.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(cell, animated: true)
     }
 }

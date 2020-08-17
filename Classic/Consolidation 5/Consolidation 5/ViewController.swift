@@ -11,7 +11,7 @@ import UIKit
     class ViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var photos = [Photo]()
-    var counter = 0
+    public var counter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,6 @@ import UIKit
             vc.selectedImage = path.path
             vc.namePhoto = photos[indexPath.row].name
             vc.photo = photos[indexPath.row]
-            vc.table = self
             
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -75,27 +74,6 @@ import UIKit
         present(picker, animated: true)
     }
     
-    open func rename(photo: Photo) {
-        let cell = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
-        cell.addTextField()
-        
-        cell.addAction(UIAlertAction(title: "Yes", style: .default){ [weak cell, weak self] _ in
-            guard let newName = cell?.textFields?[0].text else { return }
-            photo.name = newName
-            
-            self?.tableView.reloadData()
-        })
-        cell.addAction(UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
-            self?.counter += 1
-            photo.name = "Photo Number: \(self?.counter ?? 0)"
-            
-            self?.tableView.reloadData()
-        })
-        
-        present(cell, animated: true)
-    }
-
-   
     
 }
 
