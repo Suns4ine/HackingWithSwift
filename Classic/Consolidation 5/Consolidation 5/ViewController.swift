@@ -21,6 +21,13 @@ import UIKit
         // Do any additional setup after loading the view.
     }
 
+        override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            let photo = photos[indexPath.row]
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {(_, self, _)  in
+                
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
     }
