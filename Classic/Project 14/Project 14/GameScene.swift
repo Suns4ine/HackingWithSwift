@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     var gameScore: SKLabelNode!
     var slots = [WhackSlot]()
+    var popupTime = 0.85
     var score = 0 {
         didSet {
             gameScore.text = "Score \(score)"
@@ -54,4 +55,5 @@ class GameScene: SKScene {
         addChild(slot)
         slots.append(slot)
     }
+    
 }
