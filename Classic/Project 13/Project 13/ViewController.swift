@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var currentImage: UIImage!
     var context: CIContext!
     var currentFilter: CIFilter!
+    var oldImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +32,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         
+         
         dismiss(animated: true)
+        UIImageView.animate(withDuration: 1, delay: 3, options: [], animations: {
+            self.imageView.alpha = 1
+        })
         
-        currentImage = image
+       currentImage = image
         
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
@@ -67,8 +72,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             present(ac, animated: true)
             return
         }
-        
+
         UIImageWriteToSavedPhotosAlbum(imageView.image!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+
     }
     
     @IBAction func intensivityChanged(_ sender: Any) {
@@ -76,10 +82,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func importPicture() {
+
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
+
     }
     
     func applyProcessing() {
