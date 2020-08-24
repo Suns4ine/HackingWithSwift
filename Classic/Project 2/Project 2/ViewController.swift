@@ -57,18 +57,27 @@ class ViewController: UIViewController {
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
         
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+                sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                sender.transform = .identity
+            })
+        
         if sender.tag == correctAnswer {
             title = "Correct"
             score += 1
             correctAnswer = .random(in: 0...2)
             textBanner = "Your score is \(score)."
+
+
         } else {
             title = "Oops"
             score -= 1
             textBanner = "maybe this is a \(countries[sender.tag].capitalized)"
         }
+
         result += 1
         
+
         if (result == 10) {
 
             let final = UIAlertController(title: "The end", message: "Your result is \(score) out of 10", preferredStyle: .alert)
