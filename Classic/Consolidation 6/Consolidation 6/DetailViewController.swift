@@ -11,26 +11,27 @@ import UIKit
 class DetailViewController: UIViewController {
 
 
-    @IBOutlet var capitalSity: UILabel!
-    @IBOutlet var size: UILabel!
-    @IBOutlet var peoples: UILabel!
-    @IBOutlet var value: UILabel!
-    @IBOutlet var bio: UILabel!
+
+    var country: Country!
+    @IBOutlet var text: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        guard country != nil else { return }
+        
+        title = "\(country.name)"
+        text.text = """
+        Capital Sity: \(country.capitalSity)
+        
+        Value: \(country.value)
+        
+        Peoples: \(country.peoples)
+        
+        Size: \(country.size) км в квадрате
+        
+        Bio: \(country.bio)
+        """
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
