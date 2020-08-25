@@ -10,7 +10,7 @@ import Foundation
 
 struct Country {
     let name: String
-    let society: String
+    let capitalSity: String
     let peoples: Int
     let size: Int
     let value: String

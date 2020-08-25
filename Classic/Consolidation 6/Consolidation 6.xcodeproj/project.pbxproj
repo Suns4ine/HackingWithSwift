@@ -14,6 +14,7 @@
 		12EA28D924F58BD900A90EED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12EA28D824F58BD900A90EED /* Assets.xcassets */; };
 		12EA28DC24F58BD900A90EED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12EA28DA24F58BD900A90EED /* LaunchScreen.storyboard */; };
 		12EA28E424F58CE900A90EED /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EA28E324F58CE900A90EED /* Country.swift */; };
+		12EA28E624F5ADD000A90EED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EA28E524F5ADD000A90EED /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		12EA28DB24F58BD900A90EED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12EA28DD24F58BD900A90EED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12EA28E324F58CE900A90EED /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		12EA28E524F5ADD000A90EED /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				12EA28CF24F58BD800A90EED /* AppDelegate.swift */,
 				12EA28D124F58BD800A90EED /* SceneDelegate.swift */,
 				12EA28D324F58BD800A90EED /* ViewController.swift */,
+				12EA28E524F5ADD000A90EED /* DetailViewController.swift */,
 				12EA28E324F58CE900A90EED /* Country.swift */,
 				12EA28D524F58BD800A90EED /* Main.storyboard */,
 				12EA28D824F58BD900A90EED /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 			files = (
 				12EA28E424F58CE900A90EED /* Country.swift in Sources */,
 				12EA28D424F58BD800A90EED /* ViewController.swift in Sources */,
+				12EA28E624F5ADD000A90EED /* DetailViewController.swift in Sources */,
 				12EA28D024F58BD800A90EED /* AppDelegate.swift in Sources */,
 				12EA28D224F58BD800A90EED /* SceneDelegate.swift in Sources */,
 			);
