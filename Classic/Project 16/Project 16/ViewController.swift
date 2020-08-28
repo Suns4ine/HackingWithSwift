@@ -15,6 +15,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Theme", style: .done, target: self, action: #selector(themeSelection))
+        
         let lonodon = Capital(title: "London", coordinate: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), info: "Home to the 2012 Summer Olympics.")
         let oslo = Capital(title: "Oslo", coordinate: CLLocationCoordinate2D(latitude: 59.95, longitude: 10.75), info: "Founded over a thousand years ago.")
         let paris = Capital(title: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508), info: "Often called the City of Light.")
@@ -23,6 +25,22 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         mapView.addAnnotations([lonodon, oslo, paris, rome, wachington])
 
+    }
+    
+    @objc func themeSelection() {
+        let ac = UIAlertController(title: "Choose Theme", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Standart", style: .default) { [weak self] _ in
+            self?.mapView.mapType = MKMapType.standard
+        })
+        ac.addAction(UIAlertAction(title: "Hybrid", style: .default) { [weak self] _ in
+            self?.mapView.mapType = MKMapType.hybridFlyover
+        })
+        ac.addAction(UIAlertAction(title: "Satellite", style: .default){ [weak self] _ in
+            self?.mapView.mapType = MKMapType.satellite
+        })
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -34,12 +52,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
             
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
+            annotationView?.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
             
             let btn = UIButton(type: .detailDisclosure)
             annotationView?.rightCalloutAccessoryView = btn
         } else {
             annotationView?.annotation = annotation
+            annotationView?.tintColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         }
+            
         return annotationView
     }
     
