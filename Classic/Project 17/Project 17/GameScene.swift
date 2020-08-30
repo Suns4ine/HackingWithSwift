@@ -52,7 +52,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        var location = touch.location(in: self)
+        
+        if location.y < 100 {
+            location.y = 100
+        } else if location.y > 668 {
+            location.y = 668
+        }
+        
+        player.position = location
+    }
+    
     override func update(_ currentTime: TimeInterval) {
+        for node in children {
+            if node.position.x < -300 {
+                node.removeFromParent()
+            }
+        }
+        
+        if !isGameOver {
+            score += 1
+        }
         
     }
     
@@ -69,5 +91,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.physicsBody?.angularVelocity = -5
         sprite.physicsBody?.linearDamping = 0
         sprite.physicsBody?.angularDamping = 0
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let explosion = SKEmitterNode(fileNamed: "explosion")!
+        explosion.position = player.position
+        addChild(explosion)
+        
+        player.removeFromParent()
+        
+        isGameOver = true
     }
 }
