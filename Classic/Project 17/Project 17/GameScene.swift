@@ -14,6 +14,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var startfield: SKEmitterNode!
     var player: SKSpriteNode!
     var scoreLabel: SKLabelNode!
+    var scoreRubish = 0 {
+        didSet {
+            if timeInterval > 0.35 {
+                if scoreRubish - 20 == 0 {
+                    scoreRubish = 0
+                    timeInterval -= 0.1
+                    gameTimer?.invalidate()
+                    gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+                }
+            }
+        }
+    }
+    var timeInterval = 1.3
 
     let possibleEnemis = ["ball", "hammer", "tv"]
     var isGameOver = false
@@ -49,7 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -80,7 +93,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     @objc func createEnemy() {
         guard let enemy = possibleEnemis.randomElement() else { return }
+        if isGameOver == true { return }
         
+        scoreRubish += 1
         let sprite = SKSpriteNode(imageNamed: enemy)
         sprite.position = CGPoint(x: 1200, y: Int.random(in: 50...736))
         addChild(sprite)
@@ -101,5 +116,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         
         isGameOver = true
+        print(scoreRubish)
     }
 }
