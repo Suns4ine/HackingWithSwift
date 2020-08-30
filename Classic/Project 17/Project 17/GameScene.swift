@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode!
     var scoreRubish = 0 {
         didSet {
-            if timeInterval > 0.35 {
+            if timeInterval > 0.35 && !isGameOver {
                 if scoreRubish - 20 == 0 {
                     scoreRubish = 0
                     timeInterval -= 0.1
@@ -118,4 +118,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         isGameOver = true
         print(scoreRubish)
     }
+
 }
