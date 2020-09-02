@@ -16,10 +16,12 @@ class GameScene: SKScene {
     var leftEdge = -22
     var bottomEdge = -22
     let righitEdge = 1024 + 22
+    var scoreLabel: SKLabelNode!
+    var countFireWorks = 0
     
     var score = 0 {
         didSet {
-            
+            scoreLabel.text = "Score: \(score)"
         }
     }
     
@@ -29,6 +31,12 @@ class GameScene: SKScene {
         background.blendMode = .replace
         background.zPosition = -1
         addChild(background)
+        
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.text = "Score: 0"
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.position = CGPoint(x: 980, y: 700)
+        addChild(scoreLabel)
         
         gameTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(launchFireworks), userInfo: nil, repeats: true)
 
@@ -102,6 +110,8 @@ class GameScene: SKScene {
         firework.name = "firework"
         node.addChild(firework)
         
+        gameOver()
+       
         switch Int.random(in: 0...2) {
         case 0:
             firework.color = .cyan
@@ -163,6 +173,7 @@ class GameScene: SKScene {
             }
         }
         
+       
         switch numExploded {
         case 0:
             break
@@ -185,5 +196,20 @@ class GameScene: SKScene {
             addChild(emitter)
         }
         firework.removeFromParent()
+    }
+    
+    func gameOver() {
+        countFireWorks += 1
+        if countFireWorks == 50 {
+            
+            self.gameTimer?.invalidate()
+            print("Game Over")
+            
+            let gameOver = SKLabelNode(fontNamed: "Chalkduster")
+            scoreLabel.text = "Game Over"
+            scoreLabel.horizontalAlignmentMode = .right
+            scoreLabel.position = CGPoint(x: 512 , y: 384)
+            addChild(gameOver)
+        }
     }
 }
