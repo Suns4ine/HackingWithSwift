@@ -8,13 +8,14 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UINavigationControllerDelegate {
     
 
     @IBOutlet var imageView: UIImageView!
     var selectedImage: String?
     var namePhoto: String = ""
-    var photo: Photo?
+    var photo: Photo!
+    var identifier: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,15 +57,29 @@ class DetailViewController: UIViewController {
     
     func rename(photo: Photo?) {
         guard photo != nil else { return }
-        let cell = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
-        cell.addTextField()
         
-        cell.addAction(UIAlertAction(title: "Yes", style: .default){ [weak cell] _ in
-            guard let newName = cell?.textFields?[0].text else { return }
-            photo!.name = newName
-        })
-        cell.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
-        present(cell, animated: true)
-    }
+            let cell = UIAlertController(title: "Name", message: nil, preferredStyle: .alert)
+            cell.addTextField()
+            
+            cell.addAction(UIAlertAction(title: "Yes", style: .default){ [weak cell, weak self] _ in
+                if let vc = self?.storyboard?.instantiateViewController(identifier: "Table") as? ViewController {
+                    guard let newName = cell?.textFields?[0].text else { return }
+                    photo!.name = newName
+                    self?.namePhoto = newName
+                    guard let id =  self?.identifier else { return }
+                    //if vc.photos.isEmpty { vc.photos.append(self!.photo) }
+                    vc.photos.append(self!.photo)
+                    self?.viewDidLoad()
+                    //vc.photos.remove(at: id)
+                    //vc.photos.insert(self!.photo, at: id)
+                    //vc.photos[id].name = newName
+                    vc.tableView.reloadData()
+                    vc.viewDidLoad()
+                }
+            })
+            cell.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            
+            present(cell, animated: true)
+        }
 }
