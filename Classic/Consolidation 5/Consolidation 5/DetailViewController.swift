@@ -15,6 +15,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     var selectedImage: String?
     var namePhoto: String = ""
     var photo: Photo!
+    var photos = [Photo]()
     var identifier: Int!
     
     override func viewDidLoad() {
@@ -41,6 +42,18 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         ac.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
             self?.rename(photo: self?.photo)
           })
+    
+        ac.addAction(UIAlertAction(title: "Delete", style: .default){ [weak self] _ in
+                   if let vc = self?.storyboard?.instantiateViewController(identifier: "Table") as? ViewController {
+                       self?.photo = nil
+                    _ = self?.navigationController?.popViewController(animated: true)
+                    self?.photos.remove(at: self!.identifier)
+                    vc.photos = self!.photos
+                    var index = IndexPath(row: self!.identifier, section: 0)
+                    vc.tableView.deleteRows(at: [index], with: .automatic)
+    
+                   }
+               })
           //ac.addAction(UIAlertAction(title: "Delete", style: .default, handler: nil))
           ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
           

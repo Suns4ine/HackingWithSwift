@@ -44,6 +44,7 @@ import UIKit
             vc.selectedImage = path.path
             vc.namePhoto = photos[indexPath.row].name
             vc.photo = photos[indexPath.row]
+            vc.photos = photos
             vc.identifier = indexPath.row
             print(indexPath.row)
             
