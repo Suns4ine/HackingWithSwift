@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		12D134FE2502DD82004805B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D134FD2502DD82004805B6 /* AppDelegate.swift */; };
 		12D135002502DD82004805B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D134FF2502DD82004805B6 /* SceneDelegate.swift */; };
-		12D135022502DD82004805B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D135012502DD82004805B6 /* ViewController.swift */; };
+		12D135022502DD82004805B6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D135012502DD82004805B6 /* TableViewController.swift */; };
 		12D135052502DD82004805B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D135032502DD82004805B6 /* Main.storyboard */; };
 		12D135072502DD83004805B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12D135062502DD83004805B6 /* Assets.xcassets */; };
 		12D1350A2502DD83004805B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D135082502DD83004805B6 /* LaunchScreen.storyboard */; };
+		12D135122503CD69004805B6 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D135112503CD69004805B6 /* NoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		12D134FA2502DD82004805B6 /* Consolidation 8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Consolidation 8.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		12D134FD2502DD82004805B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12D134FF2502DD82004805B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		12D135012502DD82004805B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		12D135012502DD82004805B6 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		12D135042502DD82004805B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12D135062502DD83004805B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12D135092502DD83004805B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12D1350B2502DD83004805B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12D135112503CD69004805B6 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,9 @@
 			children = (
 				12D134FD2502DD82004805B6 /* AppDelegate.swift */,
 				12D134FF2502DD82004805B6 /* SceneDelegate.swift */,
-				12D135012502DD82004805B6 /* ViewController.swift */,
+				12D135012502DD82004805B6 /* TableViewController.swift */,
 				12D135032502DD82004805B6 /* Main.storyboard */,
+				12D135112503CD69004805B6 /* NoteViewController.swift */,
 				12D135062502DD83004805B6 /* Assets.xcassets */,
 				12D135082502DD83004805B6 /* LaunchScreen.storyboard */,
 				12D1350B2502DD83004805B6 /* Info.plist */,
@@ -138,7 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12D135022502DD82004805B6 /* ViewController.swift in Sources */,
+				12D135122503CD69004805B6 /* NoteViewController.swift in Sources */,
+				12D135022502DD82004805B6 /* TableViewController.swift in Sources */,
 				12D134FE2502DD82004805B6 /* AppDelegate.swift in Sources */,
 				12D135002502DD82004805B6 /* SceneDelegate.swift in Sources */,
 			);
