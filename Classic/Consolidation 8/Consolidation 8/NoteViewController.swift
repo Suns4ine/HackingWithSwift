@@ -10,6 +10,8 @@ import UIKit
 
 class NoteViewController: UIViewController, UINavigationControllerDelegate {
 
+    var note: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

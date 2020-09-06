@@ -27,7 +27,9 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         var note = ""
         notes.append(note)
         
-        if let vc = storyboard?.instantiateInitialViewController(creator: <#T##((NSCoder) -> ViewController?)?##((NSCoder) -> ViewController?)?##(NSCoder) -> ViewController?#>)
+        if let vc = storyboard?.instantiateViewController(identifier: "Note") as? NoteViewController {
+            
+        }
     }
 
 }
