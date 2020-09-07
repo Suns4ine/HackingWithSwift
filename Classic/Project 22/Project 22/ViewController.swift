@@ -13,6 +13,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet var distanceReading: UILabel!
     var locationManager: CLLocationManager?
+    var firstFound = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         if let beacon = beacons.first {
+            if firstFound == false {
+                firstFound != firstFound
+                
+            }
             update(distance: beacon.proximity)
         } else {
             update(distance: .unknown)
@@ -67,6 +72,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 self.distanceReading.text = "UNKNOWN"
             }
         }
+    }
+    
+    func firstFoundController() {
+        let ac = UIAlertController(title: "YEAH", message: "Your first found ibeacon", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Oh", style: .default))
+        
+        present(ac, animated: true)
     }
 
 }
