@@ -234,10 +234,10 @@ class GameScene: SKScene {
                 enemy.addChild(emitter)
             }
         } else {
-            enemy = SKSpriteNode(imageNamed: "penguin")
-            run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
-            enemy.name = "enemy"
-        }
+                   enemy = SKSpriteNode(imageNamed: "penguin")
+                   run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
+                   enemy.name = "enemy"
+               }
         
         let randomPosition = CGPoint(x: Int.random(in: 64...960), y: -128)
         enemy.position = randomPosition
@@ -255,6 +255,13 @@ class GameScene: SKScene {
             randomXVelocity = -Int.random(in: 8...15)
         }
         
+        let randomYVelocity = Int.random(in: 24...32)
+
+        
+        enemy.physicsBody = SKPhysicsBody(circleOfRadius: 64)
+        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * 40, dy: randomYVelocity * 40)
+        enemy.physicsBody?.angularVelocity = randomAngularVelocity
+        enemy.physicsBody?.collisionBitMask = 0
         
         
         addChild(enemy)
