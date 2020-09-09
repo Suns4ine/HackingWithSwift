@@ -10,6 +10,10 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+enum SequenceType: CaseIterable {
+    case oneBomb, one, twoWithOneBomb, two, three, four, chain, fastChain
+}
+
 enum ForceBomb {
     case never, always, random
 }
@@ -37,6 +41,11 @@ class GameScene: SKScene {
     var bombSoundEffect: AVAudioPlayer?
     var activeEnemies = [SKSpriteNode]()
     
+    var popupTime = 0.9
+    var sequence = [SequenceType]()
+    var sequencePosition = 0
+    var chainDelay = 3.0
+    var nextSequenceQueued = true
     
     
     override func didMove(to view: SKView) {
@@ -54,6 +63,15 @@ class GameScene: SKScene {
         createLives()
         createSlices()
         
+        sequence = [.oneBomb, .oneBomb, .twoWithOneBomb, .twoWithOneBomb, .three, .one, .chain]
+        
+        for _ in 0...1000 {
+            if let nextSequence = SequenceType.allCases.randomElement() {
+                sequence.append(nextSequence)
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in self?.tossEnemies()}
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -78,11 +96,11 @@ class GameScene: SKScene {
     }
     
     func createScore() {
-        gameScore = SKLabelNode(fontNamed: "Chalkduster")
+       gameScore = SKLabelNode(fontNamed: "Chalkduster")
         gameScore.horizontalAlignmentMode = .left
         gameScore.fontSize = 48
         addChild(gameScore)
-        
+
         gameScore.position = CGPoint(x: 8, y: 8)
         score = 0
     }
@@ -111,14 +129,31 @@ class GameScene: SKScene {
             bombSoundEffect?.stop()
             bombSoundEffect = nil
         }
+        
+        if activeEnemies.count > 0 {
+            for (index, node) in activeEnemies.enumerated().reversed() {
+                if node.position.y < -140 {
+                    node.removeFromParent()
+                    activeEnemies.remove(at: index)
+                }
+            }
+        } else {
+            if !nextSequenceQueued {
+                DispatchQueue.main.asyncAfter(deadline: .now() + popupTime) { [weak self] in
+                    self?.tossEnemies()
+                }
+                
+                nextSequenceQueued = true
+            }
+        }
     }
     
     func createLives() {
-        for i in 0..<3 {
-            let spriteNode = SKSpriteNode(imageNamed: "slicelife")
+       for i in 0 ..< 3 {
+            let spriteNode = SKSpriteNode(imageNamed: "sliceLife")
             spriteNode.position = CGPoint(x: CGFloat(834 + (i * 70)), y: 720)
             addChild(spriteNode)
-            
+
             livesImages.append(spriteNode)
         }
     }
@@ -146,20 +181,20 @@ class GameScene: SKScene {
     }
     
     func createSlices() {
-        activeSliceBG = SKShapeNode()
-        activeSliceBG.zPosition = 2
-        
-        activeSliceFG = SKShapeNode()
-        activeSliceFG.zPosition = 3
-        
-        activeSliceBG.strokeColor = UIColor(red: 1, green: 0.9, blue: 0, alpha: 1)
-        activeSliceBG.lineWidth = 9
-        
-        activeSliceFG.strokeColor = UIColor.white
-        activeSliceFG.lineWidth = 5
-        
-        addChild(activeSliceBG)
-        addChild(activeSliceFG)
+         activeSliceBG = SKShapeNode()
+           activeSliceBG.zPosition = 2
+
+           activeSliceFG = SKShapeNode()
+           activeSliceFG.zPosition = 3
+
+           activeSliceBG.strokeColor = UIColor(red: 1, green: 0.9, blue: 0, alpha: 1)
+           activeSliceBG.lineWidth = 9
+
+           activeSliceFG.strokeColor = UIColor.white
+           activeSliceFG.lineWidth = 5
+
+           addChild(activeSliceBG)
+           addChild(activeSliceFG)
     }
     
     func createEnenmy(forceBomb: ForceBomb = .random) {
@@ -237,5 +272,50 @@ class GameScene: SKScene {
         run(swooshSound) { [weak self] in
             self?.isSwooshSoundActive = false
         }
+    }
+    
+    func tossEnemies() {
+        popupTime *= 0.991
+        chainDelay *= 0.99
+        physicsWorld.speed *= 1.02
+        
+        let sequenceType = sequence[sequencePosition]
+        
+        switch sequenceType {
+        case .oneBomb:
+            createEnenmy(forceBomb: .never)
+        case .one:
+            createEnenmy()
+        case .twoWithOneBomb:
+            createEnenmy(forceBomb: .never)
+            createEnenmy(forceBomb: .always)
+        case .two:
+            createEnenmy()
+            createEnenmy()
+        case .three:
+            createEnenmy()
+            createEnenmy()
+            createEnenmy()
+        case .four:
+            createEnenmy()
+            createEnenmy()
+            createEnenmy()
+            createEnenmy()
+        case .chain:
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 5.0)) { [weak self] in self?.createEnenmy()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 5.0 * 2)) { [weak self] in self?.createEnenmy()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 5.0 * 3)) { [weak self] in self?.createEnenmy()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 5.0 * 4)) { [weak self] in self?.createEnenmy()}
+        case .fastChain:
+            createEnenmy()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 10.0)) { [weak self] in self?.createEnenmy()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 10.0 * 2)) { [weak self] in self?.createEnenmy()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 10.0 * 3)) { [weak self] in self?.createEnenmy()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + (chainDelay / 10.0 * 4)) { [weak self] in self?.createEnenmy()}
+        }
+        
+        sequencePosition += 1
+        nextSequenceQueued = false
     }
 }
