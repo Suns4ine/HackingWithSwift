@@ -47,6 +47,7 @@ class GameScene: SKScene {
     var chainDelay = 3.0
     var nextSequenceQueued = true
     
+   
     var isGameEnded = false
     var scoreLabel: SKLabelNode!
     
@@ -273,7 +274,7 @@ class GameScene: SKScene {
     func createEnenmy(forceBomb: ForceBomb = .random) {
         let enemy: SKSpriteNode
 
-        var enemyType = Int.random(in: 0...6)
+         var enemyType = Int.random(in: 0...6)
 
         if forceBomb == .never {
             enemyType = 1
