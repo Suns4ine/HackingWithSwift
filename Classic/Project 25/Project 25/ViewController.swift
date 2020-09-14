@@ -131,6 +131,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         guard let mcSession = mcSession else { return }
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session: mcSession)
         mcAdvertiserAssistant?.start()
+        //mcAdvertiserAssistant = MCNearbyServiceAdvertiser(peer: "hws-project25", discoveryInfo: nil, serviceType: mcSession)
     }
     
     func joinSession(action: UIAlertAction) {
