@@ -24,6 +24,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var motionManager: CMMotionManager!
     var scoreLabel: SKLabelNode!
     
+    var levels = [String]()
+    var justlevel: String!
+    var countLevel = 0
     var isGameOver = false
     var score = 0 {
         didSet {
@@ -35,6 +38,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         motionManager = CMMotionManager()
         motionManager.startAccelerometerUpdates()
+        
+        levels += ["level1", "level2"]
+        justlevel = levels[countLevel]
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
         scoreLabel.text = "Score: 0"
@@ -87,20 +93,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func loadLevel() {
-        guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else {
-            fatalError("Could not find level1.txt in the app bundle.")
+        guard let levelURL = Bundle.main.url(forResource: justlevel, withExtension: "txt") else {
+            fatalError("Could not find \(justlevel).txt in the app bundle.")
         }
         guard let levelString = try? String(contentsOf: levelURL) else {
-            fatalError("Could not load level1.txt from the app bundle.")
+            fatalError("Could not load \(justlevel) from the app bundle.")
         }
 
-        let lines = levelString.components(separatedBy: "\n")
+        
+        var lines = [String]()
+        lines = levelString.components(separatedBy: "\n")
 
+        
+        
         for (row, line) in lines.reversed().enumerated() {
             for (column, letter) in line.enumerated() {
                 let position = CGPoint(x: (64 * column) + 32, y: (64 * row) + 32)
                 
-                if letter == "x" {
+                switch letter {
+                case "x":
                     let node = SKSpriteNode(imageNamed: "block")
                     node.position = position
 
@@ -108,7 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     node.physicsBody?.categoryBitMask = CollisionTypes.wall.rawValue
                     node.physicsBody?.isDynamic = false
                     addChild(node)
-                } else if letter == "v" {
+                case "v":
                     let node = SKSpriteNode(imageNamed: "vortex")
                     node.name = "vortex"
                     node.position = position
@@ -120,18 +131,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
                     node.physicsBody?.collisionBitMask = 0
                     addChild(node)
-                } else if letter == "s" {
+                case "s":
                     let node = SKSpriteNode(imageNamed: "star")
-                    node.name = "star"
-                    node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
-                    node.physicsBody?.isDynamic = false
+                   node.name = "star"
+                   node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+                   node.physicsBody?.isDynamic = false
 
-                    node.physicsBody?.categoryBitMask = CollisionTypes.star.rawValue
-                    node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
-                    node.physicsBody?.collisionBitMask = 0
-                    node.position = position
-                    addChild(node)
-                } else if letter == "f" {
+                   node.physicsBody?.categoryBitMask = CollisionTypes.star.rawValue
+                   node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+                   node.physicsBody?.collisionBitMask = 0
+                   node.position = position
+                   addChild(node)
+                case "f":
                     let node = SKSpriteNode(imageNamed: "finish")
                     node.name = "finish"
                     node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
@@ -142,9 +153,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     node.physicsBody?.collisionBitMask = 0
                     node.position = position
                     addChild(node)
-                } else if letter == " " {
-                    
-                } else {
+                case " ":
+                    break
+                default:
                     fatalError("Unknown level letter: \(letter)")
                 }
             }
@@ -196,7 +207,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
             score += 1
         } else if node.name == "finish" {
-            
+            player.removeFromParent()
+            createPlayer()
+            countLevel = (countLevel == (levels.count - 1)) ? 0 : countLevel + 1
+            justlevel = levels[countLevel]
+            loadLevel()
         }
     }
 }

@@ -14,6 +14,7 @@
 		121757AF250EBA010049D374 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 121757AD250EBA010049D374 /* Main.storyboard */; };
 		121757B1250EBA020049D374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 121757B0250EBA020049D374 /* Assets.xcassets */; };
 		121757B4250EBA020049D374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 121757B2250EBA020049D374 /* LaunchScreen.storyboard */; };
+		12229A84251128CA00DF5142 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12229A83251128CA00DF5142 /* level2.txt */; };
 		12E70119250FA7B000ADF004 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12E70118250FA7B000ADF004 /* level1.txt */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		121757B0250EBA020049D374 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		121757B3250EBA020049D374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		121757B5250EBA020049D374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12229A83251128CA00DF5142 /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 		12E70118250FA7B000ADF004 /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				121757AD250EBA010049D374 /* Main.storyboard */,
 				121757B0250EBA020049D374 /* Assets.xcassets */,
 				12E70118250FA7B000ADF004 /* level1.txt */,
+				12229A83251128CA00DF5142 /* level2.txt */,
 				121757B2250EBA020049D374 /* LaunchScreen.storyboard */,
 				121757B5250EBA020049D374 /* Info.plist */,
 			);
@@ -133,6 +136,7 @@
 			files = (
 				12E70119250FA7B000ADF004 /* level1.txt in Resources */,
 				121757AF250EBA010049D374 /* Main.storyboard in Resources */,
+				12229A84251128CA00DF5142 /* level2.txt in Resources */,
 				121757A6250EBA010049D374 /* GameScene.sks in Resources */,
 				121757B1250EBA020049D374 /* Assets.xcassets in Resources */,
 				121757B4250EBA020049D374 /* LaunchScreen.storyboard in Resources */,
