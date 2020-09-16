@@ -32,11 +32,22 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="70a-Wo-WZV">
                                             <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
                                         </imageView>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B2t-Ue-Ka3">
+                                            <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="70a-Wo-WZV" firstAttribute="centerY" secondItem="LHl-Sd-iIn" secondAttribute="centerY" id="PN4-Ur-ZzN"/>
                                         <constraint firstItem="70a-Wo-WZV" firstAttribute="centerX" secondItem="LHl-Sd-iIn" secondAttribute="centerX" id="PSB-dT-ZB9"/>
+                                        <constraint firstItem="B2t-Ue-Ka3" firstAttribute="bottom" secondItem="70a-Wo-WZV" secondAttribute="bottom" id="TMm-nJ-dZg"/>
                                         <constraint firstItem="70a-Wo-WZV" firstAttribute="top" secondItem="LHl-Sd-iIn" secondAttribute="top" id="aiB-rB-jdU"/>
+                                        <constraint firstItem="B2t-Ue-Ka3" firstAttribute="trailing" secondItem="70a-Wo-WZV" secondAttribute="trailing" id="gJ4-yE-lc2"/>
+                                        <constraint firstItem="B2t-Ue-Ka3" firstAttribute="top" secondItem="70a-Wo-WZV" secondAttribute="top" id="hIC-2w-ZrZ"/>
+                                        <constraint firstItem="B2t-Ue-Ka3" firstAttribute="leading" secondItem="70a-Wo-WZV" secondAttribute="leading" id="q6k-rh-HXb"/>
                                         <constraint firstItem="70a-Wo-WZV" firstAttribute="leading" secondItem="LHl-Sd-iIn" secondAttribute="leading" id="qoK-Mc-jWu"/>
                                     </constraints>
                                 </collectionViewCellContentView>

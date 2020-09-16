@@ -14,6 +14,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
     
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+       disConnect(peer: peerID)
         switch state {
         case .connected:
             print("Connected: \(peerID.displayName)")
@@ -21,6 +22,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
             print("Connecting: \(peerID.displayName)")
         case .notConnected:
             print("Not Connected: \(peerID.displayName)")
+            disConnect(peer: peerID)
         default:
             print("Unknown state received: \(peerID.displayName)")
         }
@@ -58,6 +60,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
 
     
 
+    var data = [Any]()
     var images = [UIImage]()
     var peerID = MCPeerID(displayName: UIDevice.current.name)
     var mcSession: MCSession?
@@ -67,7 +70,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         super.viewDidLoad()
         
         title = "Selfie Share"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(dataSelection))
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPromt))
         
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
@@ -88,7 +91,7 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         return cell
     }
     
-    @objc func importPicture() {
+    func importPicture(action: UIAlertAction) {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
@@ -131,7 +134,6 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         guard let mcSession = mcSession else { return }
         mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "hws-project25", discoveryInfo: nil, session: mcSession)
         mcAdvertiserAssistant?.start()
-        //mcAdvertiserAssistant = MCNearbyServiceAdvertiser(peer: "hws-project25", discoveryInfo: nil, serviceType: mcSession)
     }
     
     func joinSession(action: UIAlertAction) {
@@ -139,6 +141,38 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         let mcBrowser = MCBrowserViewController(serviceType: "hws-project25", session: mcSession)
         mcBrowser.delegate = self
         present(mcBrowser, animated: true)
+    }
+    
+    func disConnect(peer: MCPeerID) {
+        let ac = UIAlertController(title: "DisConnect", message: "\(peer.displayName) bye", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ok", style: .default))
+        
+        present(ac, animated: true)
+    }
+    
+    @objc func dataSelection() {
+        
+        let ac = UIAlertController(title: "Selcetion", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Text", style: .default, handler: importText))
+        ac.addAction(UIAlertAction(title: "Picture", style: .default, handler: importPicture))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
+    }
+    
+    func importText(action: UIAlertAction) {
+        let ac = UIAlertController(title: "Enter text", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
+            guard let answer = ac?.textFields?[0] else { return }
+            
+        }
+        
+        ac.addAction(submitAction)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
+        
     }
 }
 
