@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBAction func redrawTapped(_ sender: Any) {
         currentDrawType += 1
         
-        if currentDrawType > 5 {
+        if currentDrawType > 6 {
             currentDrawType = 0
         }
         
@@ -33,6 +33,8 @@ class ViewController: UIViewController {
             drawLines()
         case 5:
             drawImagesAndText()
+        case 6:
+            drawSmile()
         default:
             break
         }
@@ -164,6 +166,32 @@ class ViewController: UIViewController {
             let mouse = UIImage(named: "mouse")
             mouse?.draw(at: CGPoint(x: 300, y: 150))
         }
+        imageView.image = img
+    }
+    
+    func drawSmile() {
+        let render = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        
+        let img = render.image { ctx in
+            let leftRectangle = CGRect(x: 0, y: 50, width: 152, height: 152).insetBy(dx: 5, dy: 5)
+            
+            ctx.cgContext.setFillColor(UIColor.yellow.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            ctx.cgContext.setLineWidth(5)
+            
+            ctx.cgContext.addEllipse(in: leftRectangle)
+            ctx.cgContext.drawPath(using: .fillStroke)
+            
+            let rightRectangle = CGRect(x: 362, y: 50, width: 152, height: 152).insetBy(dx: 5, dy: 5)
+            
+            ctx.cgContext.setFillColor(UIColor.yellow.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            ctx.cgContext.setLineWidth(5)
+            
+            ctx.cgContext.addEllipse(in: rightRectangle)
+            ctx.cgContext.drawPath(using: .fillStroke)
+        }
+        
         imageView.image = img
     }
 }
