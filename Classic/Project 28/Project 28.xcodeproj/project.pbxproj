@@ -13,6 +13,8 @@
 		12ED5CCF25169C1900A85D21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12ED5CCD25169C1900A85D21 /* Main.storyboard */; };
 		12ED5CD125169C1B00A85D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12ED5CD025169C1B00A85D21 /* Assets.xcassets */; };
 		12ED5CD425169C1B00A85D21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12ED5CD225169C1B00A85D21 /* LaunchScreen.storyboard */; };
+		12ED5CDD2518C0F100A85D21 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED5CDB2518C0F100A85D21 /* KeychainItemAccessibility.swift */; };
+		12ED5CDE2518C0F100A85D21 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12ED5CDC2518C0F100A85D21 /* KeychainWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		12ED5CD025169C1B00A85D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12ED5CD325169C1B00A85D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12ED5CD525169C1B00A85D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12ED5CDB2518C0F100A85D21 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		12ED5CDC2518C0F100A85D21 /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				12ED5CD025169C1B00A85D21 /* Assets.xcassets */,
 				12ED5CD225169C1B00A85D21 /* LaunchScreen.storyboard */,
 				12ED5CD525169C1B00A85D21 /* Info.plist */,
+				12ED5CDB2518C0F100A85D21 /* KeychainItemAccessibility.swift */,
+				12ED5CDC2518C0F100A85D21 /* KeychainWrapper.swift */,
 			);
 			path = "Project 28";
 			sourceTree = "<group>";
@@ -139,8 +145,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				12ED5CCC25169C1900A85D21 /* ViewController.swift in Sources */,
+				12ED5CDD2518C0F100A85D21 /* KeychainItemAccessibility.swift in Sources */,
 				12ED5CC825169C1900A85D21 /* AppDelegate.swift in Sources */,
 				12ED5CCA25169C1900A85D21 /* SceneDelegate.swift in Sources */,
+				12ED5CDE2518C0F100A85D21 /* KeychainWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
