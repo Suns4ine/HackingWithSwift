@@ -7,12 +7,40 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class ViewController: UIViewController {
 
     @IBOutlet var secret: UITextView!
    
     @IBAction func autenticateTapped(_ sender: Any) {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identifity yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                [weak self] succes, authenticationError in
+                
+                DispatchQueue.main.async {
+                    if succes {
+                        self?.unlockSecretMessage()
+
+                    } else {
+                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                        self?.present(ac, animated: true)
+                        
+                    }
+                }
+            }
+        } else {
+            let ac = UIAlertController(title: "Biometry unavalible", message: "Your device is not configured for biometric authentification", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(ac, animated: true)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -20,9 +48,13 @@ class ViewController: UIViewController {
         
         title = "Nothing to see here"
         
+
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+
     }
 
     @objc func adjustForKeyboard(notification: Notification) {
