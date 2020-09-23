@@ -8,14 +8,24 @@
 
 import UIKit
 
-class ViewController: UICollectionViewController {
+class ViewController: UIViewController {
 
+    
+    @IBOutlet var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: #selector(addPicture))
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func addText(_ sender: Any) {
+    }
+    
+    @IBAction func clearText(_ sender: Any) {
+    }
+    @IBAction func saveImage(_ sender: Any) {
+    }
     @objc func addPicture() {
         
     }
