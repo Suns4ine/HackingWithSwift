@@ -25,6 +25,7 @@ class ViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     if succes {
+                        self?.navigationController?.setNavigationBarHidden(false, animated: true)
                         self?.unlockSecretMessage()
 
                     } else {
@@ -49,6 +50,9 @@ class ViewController: UIViewController {
         title = "Nothing to see here"
         
 
+       
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveSecretMessage))
+         navigationController?.setNavigationBarHidden(true, animated: true)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -56,6 +60,7 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
 
     }
+    
 
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -77,6 +82,8 @@ class ViewController: UIViewController {
     
     @objc func saveSecretMessage() {
         guard secret.isHidden == false else { return }
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
         
         KeychainWrapper.standard.set(secret.text, forKey: "SecretMessage")
         secret.resignFirstResponder()
