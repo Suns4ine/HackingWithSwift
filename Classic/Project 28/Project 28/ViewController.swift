@@ -40,22 +40,22 @@ class ViewController: UIViewController {
             }
         } else {
             if isPassword == false {
-                let ac = UIAlertController(title: "New Password", message: nil, preferredStyle: .alert)
-                ac.addTextField()
-                
-                let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
-                    guard let answer = ac?.textFields?[0].text else { return }
-                    
-                    if answer.isEmpty { return }
-                    self?.isPassword = true
-                    self?.stringpassword = answer
-                    self?.checkPassword(pass: answer)
-                    
-                }
-                ac.addAction(submitAction)
-                ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                
-                present(ac, animated: true)
+               let ac = UIAlertController(title: "New Password", message: nil, preferredStyle: .alert)
+               ac.addTextField()
+
+               let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
+                   guard let answer = ac?.textFields?[0].text else { return }
+
+                   if answer.isEmpty { return }
+                   self?.isPassword = true
+                   self?.stringpassword = answer
+                   self?.checkPassword(pass: answer)
+
+               }
+               ac.addAction(submitAction)
+               ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+               present(ac, animated: true)
             } else {
                 let ac = UIAlertController(title: "Check Password", message: nil, preferredStyle: .alert)
                 ac.addTextField()
@@ -72,9 +72,6 @@ class ViewController: UIViewController {
                 present(ac, animated: true)
                 
             }
-//            let ac = UIAlertController(title: "Biometry unavalible", message: "Your device is not configured for biometric authentification", preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "Ok", style: .default))
-//            self.present(ac, animated: true)
         }
         
     }
@@ -136,7 +133,7 @@ class ViewController: UIViewController {
     }
     
     func checkPassword(pass: String) {
-        if pass == stringpassword || stringpassword == nil {
+        if pass == stringpassword {
             navigationController?.setNavigationBarHidden(false, animated: true)
             unlockSecretMessage()
         } else {
@@ -147,6 +144,6 @@ class ViewController: UIViewController {
             present(ac, animated: true)
         }
     }
-
+    
 }
 
