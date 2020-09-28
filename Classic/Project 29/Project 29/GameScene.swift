@@ -174,7 +174,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func changePlayer() {
+        if currentPlayer == 1 {
+            currentPlayer = 2
+        } else {
+            currentPlayer = 1
+        }
         
+        viewController.activePlayer(number: currentPlayer)
+    }
+    
+    func bananaHit(building: SKNode, atPoint contactPoint: CGPoint) {
+        guard let building = building as? BuildingNode else { return }
+        let buildingLocation = convert(contactPoint, to: building)
+        building.hit(at: buildingLocation)
+        
+        if let explosion = SKEmitterNode(fileNamed: "hitBuilding") {
+            explosion.position = contactPoint
+            addChild(explosion)
+        }
+        
+        banana.name = ""
+        banana.removeFromParent()
+        banana = nil
+        
+        changePlayer()
+        
+    }
+    
+
+    override func update(_ currentTime: TimeInterval) {
+        guard banana != nil else { return }
+        
+        if abs(banana.position.y) > 1000 {
+            banana.removeFromParent()
+            banana = nil
+            changePlayer()
+        }
     }
     
     func deg2rad(degrees: Int) -> Double {
