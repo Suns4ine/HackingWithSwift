@@ -22,6 +22,11 @@ class TableViewController: UITableViewController, UINavigationControllerDelegate
         return notes.count
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Note") as? NoteViewController {
+            
+        }
+    }
     
     @objc func addNote() {
         var note = ""
