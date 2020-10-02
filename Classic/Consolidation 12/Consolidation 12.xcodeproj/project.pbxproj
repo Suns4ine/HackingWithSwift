@@ -13,6 +13,7 @@
 		12DB4FDE2525254400182E92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DB4FDC2525254400182E92 /* Main.storyboard */; };
 		12DB4FE02525254800182E92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DB4FDF2525254800182E92 /* Assets.xcassets */; };
 		12DB4FE32525254800182E92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DB4FE12525254800182E92 /* LaunchScreen.storyboard */; };
+		12DB4FEB2527C58600182E92 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DB4FEA2527C58600182E92 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		12DB4FDF2525254800182E92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12DB4FE22525254800182E92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12DB4FE42525254800182E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12DB4FEA2527C58600182E92 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				12DB4FD62525254400182E92 /* AppDelegate.swift */,
 				12DB4FD82525254400182E92 /* SceneDelegate.swift */,
 				12DB4FDA2525254400182E92 /* ViewController.swift */,
+				12DB4FEA2527C58600182E92 /* Card.swift */,
 				12DB4FDC2525254400182E92 /* Main.storyboard */,
 				12DB4FDF2525254800182E92 /* Assets.xcassets */,
 				12DB4FE12525254800182E92 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				12DB4FDB2525254400182E92 /* ViewController.swift in Sources */,
 				12DB4FD72525254400182E92 /* AppDelegate.swift in Sources */,
 				12DB4FD92525254400182E92 /* SceneDelegate.swift in Sources */,
+				12DB4FEB2527C58600182E92 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
