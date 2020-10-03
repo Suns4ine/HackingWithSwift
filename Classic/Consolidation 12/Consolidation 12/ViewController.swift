@@ -13,9 +13,13 @@ class ViewController: UIViewController {
     @IBOutlet var labelArray: [UILabel]!
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newTheme))
         // Do any additional setup after loading the view.
     }
 
+    @objc func newTheme() {
+        
+    }
 
 }
 
